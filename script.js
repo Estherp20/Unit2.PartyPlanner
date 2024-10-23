@@ -58,12 +58,14 @@ function renderParties(events){
  console.log(renderEvents);
 //delete button
     partyList.replaceChildren(...renderEvents);
-    document.querySelector(".delete").addEventListener('click', (e) => {
+    const deleteButton = document.querySelectorAll(".delete");
+    console.log(deleteButton);
+    deleteButton.forEach((b) => {b.addEventListener('click', (e) => {
         e.preventDefault();
         console.log(e.target);
         console.log(e.currentTarget);
         deleteParty(e.currentTarget.id);
-       })
+       })})
     //    deleteParty();
     return renderEvents;
 }
@@ -119,7 +121,7 @@ const button = document.querySelector('#button');
         const response = await fetch(`${apiUrl}/events/${id}`,{
             method: 'DELETE', 
         });
-
+        fetchParties()
        }
        catch(error){
         console.error(error);
